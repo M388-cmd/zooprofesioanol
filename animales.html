@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explora una galería interactiva y profesional de los animales más fascinantes del Zoológico Profesional de Miguel. Conoce a fondo sus hábitats, comportamientos y más.">
+    <meta name="keywords" content="Animales, Zoológico, Especies, Exóticos, Fauna">
+    <meta name="author" content="Miguel">
+    <title>Animales - Zoológico Profesional de Miguel</title>
+
+    <!-- Fuentes y Estilos -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Reset Global */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body y fuentes */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(120deg, #388e3c, #2e7d32);
+            color: white;
+            padding: 70px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 4rem;
+            font-family: Brush Script MT;
+            letter-spacing: 1px;
+            font-weight: 600;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        header nav {
+            margin-top: 30px;
+        }
+
+        header nav a {
+            color: white;
+            font-family:Algerian;
+            text-decoration: none;
+            margin: 0 25px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        header nav a:hover {
+            color: #ffeb3b;
+        }
+
+        /* Animales Section */
+        .animales-section {
+            padding: 80px 0;
+            background-color: #f8f8f8;
+            position: relative;
+        }
+
+        .animales-section h2 {
+            font-size: 3rem;
+            color: #388e3c;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .animales-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        /* Animal Card */
+        .animal-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .animal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .animal-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease-out;
+        }
+
+        .animal-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .animal-card-body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .animal-card-body h3 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #388e3c;
+            margin-bottom: 15px;
+        }
+
+        .animal-card-body p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .animal-card-body .btn {
+            padding: 12px 25px;
+            background-color: #388e3c;
+            color: white;
+            font-weight: 600;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .animal-card-body .btn:hover {
+            background-color: #2c6e2f;
+        }
+
+        /* Modal de Detalles del Animal */
+        .modal-content {
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        .modal-header {
+            background-color: #388e3c;
+            color: white;
+            border-bottom: none;
+        }
+
+        .modal-body img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        footer a {
+            color: #ffeb3b;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Zoológico Profesional de Miguel</h1>
+        <nav>
+            <a href="index.html">Bienvenida</a>
+            <a href="animales.html">Animales</a>
+            <a href="ubicacion.html">Ubicacion</a>
+            <a href="contacto.html">Contacto</a>
+        </nav>
+    </header>
+
+    <!-- Sección Animales -->
+    <section class="animales-section" id="animales">
+        <h2>Descubre Nuestros Animales</h2>
+        <div class="animales-list">
+            <!-- Card Panda -->
+            <div class="animal-card" data-bs-toggle="modal" data-bs-target="#animalModal" data-animal="panda">
+                <img src="imagenes/panda.jpg" alt="Panda">
+                <div class="animal-card-body">
+                    <h3>Panda</h3>
+                    <p>Conocido por su pelaje distintivo en blanco y negro.</p>
+                </div>
+            </div>
+
+            <!-- Card Tigre -->
+            <div class="animal-card" data-bs-toggle="modal" data-bs-target="#animalModal" data-animal="tigre">
+                <img src="imagenes/tigre.jpg" alt="Tigre">
+                <div class="animal-card-body">
+                    <h3>Tigre</h3>
+                    <p>Un depredador fuerte y ágil.</p>
+                </div>
+            </div>
+
+            <!-- Card Elefante -->
+            <div class="animal-card" data-bs-toggle="modal" data-bs-target="#animalModal" data-animal="elefante">
+                <img src="imagenes/elefante.jpg" alt="Elefante">
+                <div class="animal-card-body">
+                    <h3>Elefante</h3>
+                    <p>El mamífero terrestre más grande.</p>
+                </div>
+            </div>
+
+            <!-- Card León -->
+            <div class="animal-card" data-bs-toggle="modal" data-bs-target="#animalModal" data-animal="leon">
+                <img src="imagenes/leon.jpg" alt="León">
+                <div class="animal-card-body">
+                    <h3>León</h3>
+                    <p>El rey de la selva, símbolo de poder.</p>
+                </div>
+            </div>
+
+            <!-- Card Jirafa -->
+            <div class="animal-card" data-bs-toggle="modal" data-bs-target="#animalModal" data-animal="jirafa">
+                <img src="imagenes/jirafa.jpg" alt="Jirafa">
+                <div class="animal-card-body">
+                    <h3>Jirafa</h3>
+                    <p>La más alta de las especies terrestres.</p>
+                </div>
+            </div>
+
+            <!-- Card Cebra -->
+            <div class="animal-card" data-bs-toggle="modal" data-bs-target="#animalModal" data-animal="cebra">
+                <img src="imagenes/cebra.jpg" alt="Cebra">
+                <div class="animal-card-body">
+                    <h3>Cebra</h3>
+                    <p>Con sus rayas distintivas y su comportamiento social.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="animalModal" tabindex="-1" aria-labelledby="animalModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="animalModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="" id="animalImage" class="img-fluid" alt="Animal">
+                    <p id="animalDescription" class="mt-3"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 Zoológico Profesional de Miguel. Todos los derechos reservados. <br>
+        <a href="contacto.html">Contáctanos</a>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script para Modal -->
+    <script>
+        const animalCards = document.querySelectorAll('.animal-card');
+        const modal = new bootstrap.Modal(document.getElementById('animalModal'));
+        const animalImage = document.getElementById('animalImage');
+        const animalTitle = document.getElementById('animalModalLabel');
+        const animalDescription = document.getElementById('animalDescription');
+
+        const animalsData = {
+            panda: {
+                image: "imagenes/panda.jpg",
+                title: "Panda",
+                description: "El panda es un símbolo de conservación, conocido por su pelaje distintivo en blanco y negro. Vive principalmente en las montañas de China y se alimenta principalmente de bambú."
+            },
+            tigre: {
+                image: "imagenes/tigre.jpg",
+                title: "Tigre",
+                description: "El tigre es uno de los depredadores más poderosos de la naturaleza, famoso por su agilidad, fuerza y hermosos rayas. Habita en varios ecosistemas, desde bosques hasta selvas."
+            },
+            elefante: {
+                image: "imagenes/elefante.jpg",
+                title: "Elefante",
+                description: "El elefante es el mamífero terrestre más grande. Son conocidos por su inteligencia, sus complejas estructuras sociales y su larga memoria. Viven en sabanas, bosques y selvas."
+            },
+            leon: {
+                image: "imagenes/leon.jpg",
+                title: "León",
+                description: "El león es el rey de la selva, conocido por su poder, agilidad y su impresionante melena. Habita principalmente en las sabanas africanas."
+            },
+            jirafa: {
+                image: "imagenes/jirafa.jpg",
+                title: "Jirafa",
+                description: "La jirafa es el animal terrestre más alto, con un cuello largo que le permite alcanzar las hojas más altas de los árboles. Vive en las sabanas africanas."
+            },
+            cebra: {
+                image: "imagenes/cebra.jpg",
+                title: "Cebra",
+                description: "La cebra se distingue por sus rayas blancas y negras. Es un animal social que vive en grupos y se encuentra en las sabanas y pastizales."
+            }
+        };
+
+        animalCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const animal = card.getAttribute('data-animal');
+                animalImage.src = animalsData[animal].image;
+                animalTitle.textContent = animalsData[animal].title;
+                animalDescription.textContent = animalsData[animal].description;
+                modal.show();
+            });
+        });
+    </script>
+</body>
+</html>
+
+
